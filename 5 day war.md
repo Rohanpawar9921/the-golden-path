@@ -13,6 +13,35 @@ map is [`PROJECT_UNDERSTANDING_AND_PLAN.md`](PROJECT_UNDERSTANDING_AND_PLAN.md).
 > **The crysknife rule:** no new feature is allowed to break the full pytest
 > suite. Every PR must include a focused test or a reproducible demo command.
 
+## Starting Point: The Sietch Already Exists
+
+This is not a greenfield setup week. The repository already contains the
+project structure, source modules, raw CSV files, supplied PDFs, tests,
+configuration, entry points, and the current implementation baseline.
+
+Before anyone writes code, they must inspect the existing files on their branch:
+
+```powershell
+cd "D:\Downloads\workspace-source-20261109-102912\workspace"
+git checkout main
+git pull origin main
+git checkout <your-branch>
+git rebase main
+```
+
+Then read only the files belonging to the assigned domain and run the current
+baseline:
+
+```powershell
+cd Project
+python -m pytest ..\pytest\tests.py -q
+```
+
+Do **not** recreate folders, copy the PDF into `Project\data\docs\`, duplicate
+CSV files, rebuild already-working modules from scratch, or create parallel
+versions of existing entry points. Add a new file only when the existing
+architecture genuinely has no suitable home for the required feature.
+
 ## The Five Houses
 
 | Person | Dune title | Ownership | Main directories |
@@ -101,59 +130,68 @@ python -m pytest ..\pytest\tests.py -q
 If the suite fails, stop merging and return that PR to its owner. This prevents
 one broken branch from contaminating the remaining branches.
 
-## What Is Already Done
+## What Already Exists in This Repository
 
-Monday and Tuesday are treated as completed foundation days:
+The supplied project is already populated. Treat these as existing assets to
+understand, test, extend, or repair:
 
-- project problem and test contract understood;
-- raw data cleaned and quality report generated;
-- feature construction and model artifacts implemented;
-- PDF extraction, chunking, retrieval, and code reading implemented;
-- scheduling and deterministic prediction tools implemented;
-- persistence, authentication, workflow scaffolding, API, and chat foundations
-  implemented;
-- API documentation and ordered Swagger examples created;
-- full pytest suite currently passes locally.
+- `BreakCheck_AI.pdf`: authoritative problem statement and domain rules.
+- `Project/data/`: supplied raw CSV files, live queue inputs, and policy PDFs.
+- `pytest/tests.py`: acceptance contract.
+- `Project/config/config.py`: canonical paths, names, thresholds, roles, and
+  workflow constants.
+- `Project/data_pipeline/`: cleaning, feature construction, and profiling.
+- `Project/modeling/`: model training, evaluation, schemas, and registry.
+- `Project/knowledge/`: PDF extraction, chunking, indexing, and code reading.
+- `Project/tools/`: campaign, schedule, retrieval, and prediction tools.
+- `Project/agentic/`: workflow state, nodes, agents, and checkpoint logic.
+- `Project/persistence/`, `Project/access/`, and `Project/api/`: database,
+  authentication, permissions, and REST service.
+- `Project/dashboard/`: Streamlit page modules that need completion and polish.
+- `Project/API_DOCUMENTATION.md` and `Project/TEST_API_EXAMPLES.md`: API demo
+  contracts.
 
-The remaining visible gaps are primarily the Streamlit experience, final
-integration polish, and presentation-ready demonstrations.
+The team is starting from this baseline. Monday and Tuesday work means
+understanding, validating, and improving these existing files—not pretending
+that the repository is empty.
 
-# Monday — Day 1: Mapping the Desert
+# Monday — Day 1: Mapping the Existing Sietch
 
 **Status: complete.**
 
-Monday was for understanding the brief, reading the tests, inspecting all data,
-identifying the five domains, and establishing the cleaning/preprocessing
-direction.
+Monday is not a file-creation day. It is the day for understanding the supplied
+repository: read `BreakCheck_AI.pdf`, inspect the existing modules, read the
+pytest contract, map the current behavior, and assign ownership without
+duplicating anything.
 
 ## Monday ownership and visible result
 
 | Person | Work completed | Demonstrable result |
 |---|---|---|
-| Rohan | read project contract and planned boundaries | architecture and ownership map |
-| Chani | inspected raw extracts and cleaning defects | cleaning requirements and cleaned-data direction |
-| Duncan | inventoried sixteen PDFs | document-to-category retrieval map |
-| Gurney | interpreted broadcast day and five breach rules | compliance flow and worked-example notes |
-| Irulan | mapped dashboard users and pages | UI page sketch and API dependency list |
+| Rohan | read existing API, persistence, access, and entry points | baseline report and ownership map |
+| Chani | read existing cleaning/model modules and their outputs | data/model gap list |
+| Duncan | read supplied PDFs and existing knowledge modules | retrieval/code-reading gap list |
+| Gurney | read existing tools and workflow modules | compliance/workflow gap list |
+| Irulan | read existing dashboard modules and API docs | UI gap list and demo route |
 
 ### Monday show-and-tell checklist
 
 | Person | Show this exact visible evidence |
 |---|---|
-| Rohan | architecture and ownership map |
-| Chani | raw-versus-cleaned examples and defect list |
-| Duncan | sixteen-PDF inventory and one extracted passage |
-| Gurney | `01:10 -> 25:10` broadcast-day conversion example |
-| Irulan | dashboard page map connected to API endpoints |
+| Rohan | current pytest result, API route map, and ownership map |
+| Chani | an existing cleaned CSV/report and one raw-to-cleaned comparison |
+| Duncan | one supplied PDF passage returned by the existing knowledge layer |
+| Gurney | an existing `01:10 -> 25:10` conversion or breach-result example |
+| Irulan | existing dashboard page inventory connected to API endpoints |
 
-## Monday files to paste or reference
+## Monday files to read, demonstrate, or extend
 
 ### Rohan — project map
 
 **File:** repository root `PROJECT_UNDERSTANDING_AND_PLAN.md`
 
-**Paste/reference:** the project understanding, test contract, implementation
-phases, and validation strategy.
+**Read/reference:** the project understanding, test contract, implementation
+phases, and validation strategy. Do not create a duplicate plan.
 
 **What it does:** gives the team one source of truth for scope, dependencies,
 acceptance tests, and constraints.
@@ -166,12 +204,12 @@ Application code: Project/
 Validation command: python -m pytest ..\pytest\tests.py -q
 ```
 
-### Chani — data preparation map
+### Chani — existing data preparation
 
 **Files:** `Project/data_pipeline/`,
 `Project/run_data_pipeline.py`
 
-**Paste/reference:**
+**Read and run:**
 
 ```text
 The data pipeline reads raw CSV files as text, repairs configured defects,
@@ -182,11 +220,11 @@ cleaned extracts plus output/data_quality_report.json.
 **What it does:** protects raw inputs while producing deterministic data for
 models and live campaign tools.
 
-### Duncan — document map
+### Duncan — existing document map
 
 **Files:** `Project/data/docs/`, `Project/knowledge/`
 
-**Paste/reference:**
+**Read and demonstrate:**
 
 ```text
 The knowledge layer extracts the sixteen PDFs, splits them into sections and
@@ -196,12 +234,12 @@ category codes or exposing the excluded casebook to chat.
 
 **What it does:** makes every policy answer traceable to a supplied document.
 
-### Gurney — compliance map
+### Gurney — existing compliance map
 
 **Files:** `Project/tools/schedule_tools.py`,
 `Project/tools/campaign_data_tools.py`
 
-**Paste/reference:**
+**Read and demonstrate:**
 
 ```text
 Every spot is converted to the broadcast clock and checked in this order:
@@ -211,11 +249,11 @@ No language model decides whether a spot breaches a rule.
 
 **What it does:** keeps safety-critical clearance facts deterministic.
 
-### Irulan — dashboard map
+### Irulan — existing dashboard map
 
 **Files:** `Project/dashboard/`, `Project/API_DOCUMENTATION.md`
 
-**Paste/reference:**
+**Read and demonstrate:**
 
 ```text
 The dashboard must call the REST API for campaign facts. It must not read raw
@@ -224,37 +262,43 @@ CSV files, PDFs, databases, or implement business rules directly.
 
 **What it does:** preserves a clean frontend/backend boundary.
 
-# Tuesday — Day 2: The Foundations Become Visible
+# Tuesday — Day 2: Testing the Foundations
 
 **Status: complete.**
 
-Tuesday produced the working backend/data foundation. The UI was intentionally
-not treated as complete; it moves to Wednesday and Thursday.
+Tuesday is for validating the existing implementation and making only focused
+repairs. The data, PDF, model, tools, API, workflow, and persistence foundations
+already exist. The UI is intentionally not treated as complete; it moves to
+Wednesday and Thursday.
 
 ## Tuesday ownership and demo
 
 | Person | Completed work | Files | Tuesday demo |
 |---|---|---|---|
-| Rohan | API, database, auth foundation | `api/`, `persistence/`, `access/` | sign in and inspect API |
-| Chani | cleaning, features, model foundation | `data_pipeline/`, `modeling/` | cleaned extracts and metrics |
-| Duncan | extraction and retrieval foundation | `knowledge/`, `tools/retrieval_tools.py` | search returns source text |
-| Gurney | broadcast clock and deterministic checks | `tools/schedule_tools.py`, `tools/prediction_tools.py` | spot result with breach codes |
-| Irulan | UI requirements and API contract | `dashboard/`, `API_DOCUMENTATION.md` | UI backlog and Swagger flow |
+| Rohan | test and repair existing API/database/auth behavior | `api/`, `persistence/`, `access/` | sign in, authorize Swagger, inspect queue |
+| Chani | verify and repair existing cleaning/model behavior | `data_pipeline/`, `modeling/` | existing cleaned files, report, and metrics |
+| Duncan | verify and repair existing extraction/retrieval behavior | `knowledge/`, `tools/retrieval_tools.py` | existing search returns source text |
+| Gurney | verify and repair existing compliance/workflow behavior | `tools/`, `agentic/` | existing spot result and decision state |
+| Irulan | inspect existing dashboard modules and map missing screens | `dashboard/`, API docs | existing page inventory and UI gap board |
 
 ### Tuesday show-and-tell checklist
 
 | Person | Show this exact visible evidence |
 |---|---|
-| Rohan | Swagger sign-in response and authenticated `GET /queue` |
-| Chani | five files under `processed\` and `output\data_quality_report.json` |
-| Duncan | retrieval result containing passage text and source document |
-| Gurney | campaign profile, booked spot, schedule row, and breach result |
-| Irulan | ordered Swagger journey and dashboard wireframe |
+| Rohan | current test result for the API area plus Swagger sign-in and queue |
+| Chani | existing `processed\` files, quality report, and model metrics |
+| Duncan | existing retrieval result containing passage text and source document |
+| Gurney | existing campaign profile, schedule row, breach result, and workflow status |
+| Irulan | existing dashboard files, missing-page list, and ordered API journey |
 
-Tuesday's UI result is intentionally the API contract and wireframe. The real
-Streamlit pages are Wednesday and Thursday work, not an unfinished promise.
+Tuesday's deliverable is a verified baseline and gap list. Nobody should create
+duplicate data, PDF, model, API, or dashboard folders.
 
-## Tuesday code to paste
+## Tuesday verification commands
+
+These commands inspect and validate the files already in the repository. They
+are not instructions to recreate the project structure. Run only the command
+that belongs to the assigned owner and commit only source/test changes.
 
 ### Rohan — start the API
 
@@ -274,7 +318,7 @@ authentication, queue, assessment, decision, audit, and chat endpoints.
 **Proof:** open `http://127.0.0.1:8000/docs`, sign in, and use the Swagger
 Authorize button with the returned `X-Session-Token`.
 
-### Chani — generate cleaned data
+### Chani — verify existing cleaned data
 
 **Paste/run from:** `Project\`
 
@@ -289,13 +333,13 @@ Get-Content output\data_quality_report.json
 `data_pipeline/audience_cleaning.py`, `data_pipeline/note_cleaning.py`,
 `data_pipeline/quality_profiler.py`.
 
-**What they do:** load raw text data, repair nulls/duplicates/contradictions,
-normalize domains, and record cleaning evidence.
+**What they do:** confirm that the existing pipeline can reproduce the cleaned
+outputs and quality evidence from the supplied raw files.
 
 **Proof:** five cleaned CSVs appear under `processed\` and the quality report
 appears under `output\`.
 
-### Chani — train and save models
+### Chani — verify existing model artifacts
 
 **Paste/run from:** `Project\`
 
@@ -310,13 +354,14 @@ Get-Content output\model_metrics.json
 `modeling/issue_model.py`, `modeling/model_registry.py`,
 `modeling/model_evaluation.py`.
 
-**What they do:** build declared features, train the three models, save feature
-schemas and model files, and write evaluation metrics.
+**What they do:** confirm that the existing model code, schemas, artifacts, and
+metrics agree. If a repair is needed, change the owner source module rather
+than committing generated binaries.
 
 **Proof:** amendment, exposure, and issue artifacts exist and metrics are
 available for the SME.
 
-### Duncan — build the document index
+### Duncan — verify the existing document index
 
 **Paste/run from:** `Project\`
 
@@ -328,8 +373,8 @@ Get-ChildItem database\chroma_store
 **Files used:** `run_knowledge_indexing.py`, `knowledge/pdf_extraction.py`,
 `knowledge/chunk_splitting.py`, `knowledge/vector_index.py`.
 
-**What they do:** extract PDF text, split sections, create stable chunks, and
-store searchable document metadata.
+**What they do:** confirm the existing knowledge layer can read the supplied
+PDFs and return stable source-linked chunks. Do not copy the PDFs elsewhere.
 
 **Proof:** a retrieval query returns passage text, document name, chunk ID, and
 distance.
@@ -363,9 +408,9 @@ print("schedule rows:", len(campaign_schedule))
 **Files used:** `tools/campaign_data_tools.py`,
 `tools/schedule_tools.py`, `tools/prediction_tools.py`.
 
-**What they do:** provide campaign context, place spots on the broadcast clock,
-calculate exposure/amendment/issue facts, and produce deterministic breach
-results.
+**What they do:** exercise the existing campaign and compliance tools against
+the supplied live queue. If a repair is needed, edit only the owned source
+module.
 
 **Proof:** the worked example campaign returns booked spots, breach codes,
 exposure, first transmission, and open decisions.
@@ -463,6 +508,11 @@ Then start the dashboard in another terminal:
 ```powershell
 python -m streamlit run dashboard/clearance_queue.py
 ```
+
+The Friday run uses the repository's existing source tree and supplied
+`BreakCheck_AI.pdf`/CSV assets. It does not depend on newly copied project
+files. Generated local artifacts may be rebuilt on the machine but must remain
+ignored by Git.
 
 ## Friday afternoon SME demonstration
 
