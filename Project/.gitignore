@@ -1,0 +1,40 @@
+# Secrets and local environment configuration
+.env
+.env.*
+!.env.example
+
+# Python environments, caches, and compiled files
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local databases and generated indexes
+database/*.db
+database/*.sqlite
+database/*.sqlite3
+database/chroma_store/
+
+# Generated datasets, reports, and model artifacts
+processed/
+output/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.bak
+
+# Local IDE and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Streamlit local secrets
+.streamlit/secrets.toml
