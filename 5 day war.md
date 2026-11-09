@@ -47,10 +47,10 @@ architecture genuinely has no suitable home for the required feature.
 | Person | Dune title | Ownership | Main directories |
 |---|---|---|---|
 | Rohan Atreides | Duke and integration lead | API, database, authentication, releases | `api/`, `persistence/`, `access/` |
-| Chani Vale | Data mentat | Cleaning, features, model training | `data_pipeline/`, `modeling/` |
-| Duncan Idaho | Imperial archivist | PDFs, retrieval, code reading | `knowledge/`, retrieval tools |
-| Gurney Halleck | Compliance marshal | Scheduling, spot checks, workflow facts | `tools/`, `agentic/` |
-| Irulan Corrino | Interface architect | Streamlit UI and demo experience | `dashboard/` |
+| Kartiga | Data and ML developer | Cleaning, features, model training | `Project\data_pipeline\`, `Project\modeling\` |
+| Raghu | Knowledge and policy developer | PDFs, retrieval, code reading | `Project\knowledge\`, retrieval tools |
+| Ronit | Compliance and workflow developer | Scheduling, spot checks, workflow facts | `Project\tools\`, `Project\agentic\` |
+| Avinash | Streamlit frontend developer | Streamlit UI and demo experience | `Project\dashboard\` |
 
 ## Git Rules That Prevent Bloodshed
 
@@ -91,10 +91,10 @@ Two people must never edit the same file on the same day.
 | Owner | Directly owned files |
 |---|---|
 | Rohan | `api/`, `persistence/`, `access/`, `run_api_service.py`, `run_database_setup.py` |
-| Chani | `data_pipeline/`, `modeling/`, `run_data_pipeline.py`, `run_model_training.py` |
-| Duncan | `knowledge/`, `tools/retrieval_tools.py`, `run_knowledge_indexing.py` |
-| Gurney | `tools/campaign_data_tools.py`, `tools/schedule_tools.py`, `tools/prediction_tools.py`, `agentic/` |
-| Irulan | `dashboard/`, `run_dashboard.py` |
+| Kartiga | `Project\data_pipeline\`, `Project\modeling\`, `Project\run_data_pipeline.py`, `Project\run_model_training.py` |
+| Raghu | `Project\knowledge\`, `Project\tools\retrieval_tools.py`, `Project\run_knowledge_indexing.py` |
+| Ronit | `Project\tools\campaign_data_tools.py`, `Project\tools\schedule_tools.py`, `Project\tools\prediction_tools.py`, `Project\agentic\` |
+| Avinash | `Project\dashboard\`, `Project\run_dashboard.py` |
 
 These shared files are locked and may only be changed by Rohan after a proposed
 interface is approved:
@@ -118,7 +118,7 @@ entire incoming file during conflict resolution.
 Merge one PR at a time in this order:
 
 ```text
-Chani -> Duncan -> Gurney -> Rohan -> Irulan
+Kartiga -> Raghu -> Ronit -> Rohan -> Avinash
 ```
 
 After every merge:
@@ -155,6 +155,50 @@ The team is starting from this baseline. Monday and Tuesday work means
 understanding, validating, and improving these existing files—not pretending
 that the repository is empty.
 
+## Direct File Map: What to Open and Paste Each Day
+
+The paths below are relative to the repository root:
+
+```text
+D:\Downloads\workspace-source-20261109-102912\workspace\
+```
+
+If you are working from inside `Project`, remove the `Project\` prefix. Do not
+paste Kartiga's code into Raghu's files, and do not paste code into a Markdown
+file unless the task specifically asks for documentation.
+
+| Day | Person | Open these exact files today | Paste or implement here | Visible result |
+|---|---|---|---|---|
+| Monday | Rohan | `PROJECT_UNDERSTANDING_AND_PLAN.md`, `Project\config\config.py`, `pytest\tests.py` | Notes and ownership decisions belong in the PR description; do not alter the test or config just for planning | baseline and ownership map |
+| Monday | Kartiga | `Project\data_pipeline\*.py`, `Project\modeling\*.py`, `Project\run_data_pipeline.py`, `Project\run_model_training.py` | Data/model observations go in the PR description; code fixes go only in `data_pipeline\` or `modeling\` | data/model gap list |
+| Monday | Raghu | `BreakCheck_AI.pdf`, `Project\data\docs\`, `Project\knowledge\*.py`, `Project\tools\retrieval_tools.py` | Retrieval observations go in the PR description; code fixes go only in `knowledge\` or `retrieval_tools.py` | source-document map |
+| Monday | Ronit | `Project\tools\campaign_data_tools.py`, `Project\tools\schedule_tools.py`, `Project\tools\prediction_tools.py`, `Project\agentic\*.py` | Compliance observations go in the PR description; code fixes go only in `tools\` or `agentic\` | compliance gap list |
+| Monday | Avinash | `Project\dashboard\*.py`, `Project\API_DOCUMENTATION.md`, `Project\TEST_API_EXAMPLES.md` | UI observations go in the PR description; do not change backend files | dashboard gap list |
+| Tuesday | Rohan | `Project\api\routes.py`, `Project\api\schemas.py`, `Project\persistence\*.py`, `Project\access\*.py` | Paste API/auth fixes only into these owned files | authenticated Swagger flow |
+| Tuesday | Kartiga | `Project\data_pipeline\*.py`, `Project\modeling\*.py`, `Project\run_data_pipeline.py`, `Project\run_model_training.py` | Paste cleaning/model fixes only into these owned files | cleaned files, report, metrics |
+| Tuesday | Raghu | `Project\knowledge\*.py`, `Project\tools\retrieval_tools.py`, `Project\run_knowledge_indexing.py` | Paste extraction/retrieval fixes only into these owned files | source-linked retrieval |
+| Tuesday | Ronit | `Project\tools\*.py`, `Project\agentic\*.py` | Paste deterministic compliance/workflow fixes only into these owned files | breach result and workflow state |
+| Tuesday | Avinash | `Project\dashboard\*.py` | Paste only UI planning scaffolding or safe UI changes; use API docs for endpoint order | UI gap board and API journey |
+| Wednesday | Rohan | `Project\api\`, `Project\persistence\`, `Project\access\` | Integration fixes only in the API/backend ownership area | stable API contract |
+| Wednesday | Kartiga | `Project\modeling\`, `Project\run_model_training.py` | Paste reproducibility and display-data fixes | risk cards have trusted values |
+| Wednesday | Raghu | `Project\knowledge\`, `Project\tools\retrieval_tools.py`, chat retrieval modules | Paste source-attribution and retrieval fixes | chat answer with source |
+| Wednesday | Ronit | `Project\agentic\`, `Project\tools\` | Paste workflow and outcome integration fixes | decision path demo |
+| Wednesday | Avinash | `Project\dashboard\api_client.py`, `Project\dashboard\clearance_queue.py`, `Project\dashboard\campaign_detail.py` | Paste the first Streamlit pages here | live queue and campaign detail |
+| Thursday | Rohan | `Project\api\`, `Project\persistence\`, `Project\access\` | Paste final auth, audit, and decision fixes | role-safe end-to-end API |
+| Thursday | Kartiga | `Project\modeling\`, `Project\data_pipeline\` | Paste final edge-case or artifact fixes | model values agree with tests |
+| Thursday | Raghu | `Project\chat\`, `Project\knowledge\`, retrieval tools | Paste chat memory, refusal, and source-display fixes | grounded chat demo |
+| Thursday | Ronit | `Project\agentic\`, `Project\tools\` | Paste checkpoint and decision-route fixes | CLEAR/RESTRICT/REJECT demo |
+| Thursday | Avinash | `Project\dashboard\*.py`, `Project\run_dashboard.py` | Paste decision queue, audit, chat, and role-page UI | complete Streamlit journey |
+
+### Daily copy/paste rule
+
+1. Open the exact file path in the table.
+2. Copy only the relevant function or component into that file.
+3. Do not replace the entire file unless the PR explicitly owns that file.
+4. Run the focused test.
+5. Commit only files listed for that day.
+6. Put the command output and changed-file list in the PR.
+
 # Monday — Day 1: Mapping the Existing Sietch
 
 **Status: complete.**
@@ -169,20 +213,20 @@ duplicating anything.
 | Person | Work completed | Demonstrable result |
 |---|---|---|
 | Rohan | read existing API, persistence, access, and entry points | baseline report and ownership map |
-| Chani | read existing cleaning/model modules and their outputs | data/model gap list |
-| Duncan | read supplied PDFs and existing knowledge modules | retrieval/code-reading gap list |
-| Gurney | read existing tools and workflow modules | compliance/workflow gap list |
-| Irulan | read existing dashboard modules and API docs | UI gap list and demo route |
+| Kartiga | read existing cleaning/model modules and their outputs | data/model gap list |
+| Raghu | read supplied PDFs and existing knowledge modules | retrieval/code-reading gap list |
+| Ronit | read existing tools and workflow modules | compliance/workflow gap list |
+| Avinash | read existing dashboard modules and API docs | UI gap list and demo route |
 
 ### Monday show-and-tell checklist
 
 | Person | Show this exact visible evidence |
 |---|---|
 | Rohan | current pytest result, API route map, and ownership map |
-| Chani | an existing cleaned CSV/report and one raw-to-cleaned comparison |
-| Duncan | one supplied PDF passage returned by the existing knowledge layer |
-| Gurney | an existing `01:10 -> 25:10` conversion or breach-result example |
-| Irulan | existing dashboard page inventory connected to API endpoints |
+| Kartiga | an existing cleaned CSV/report and one raw-to-cleaned comparison |
+| Raghu | one supplied PDF passage returned by the existing knowledge layer |
+| Ronit | an existing `01:10 -> 25:10` conversion or breach-result example |
+| Avinash | existing dashboard page inventory connected to API endpoints |
 
 ## Monday files to read, demonstrate, or extend
 
@@ -204,7 +248,7 @@ Application code: Project/
 Validation command: python -m pytest ..\pytest\tests.py -q
 ```
 
-### Chani — existing data preparation
+### Kartiga — existing data preparation
 
 **Files:** `Project/data_pipeline/`,
 `Project/run_data_pipeline.py`
@@ -220,7 +264,7 @@ cleaned extracts plus output/data_quality_report.json.
 **What it does:** protects raw inputs while producing deterministic data for
 models and live campaign tools.
 
-### Duncan — existing document map
+### Raghu — existing document map
 
 **Files:** `Project/data/docs/`, `Project/knowledge/`
 
@@ -234,7 +278,7 @@ category codes or exposing the excluded casebook to chat.
 
 **What it does:** makes every policy answer traceable to a supplied document.
 
-### Gurney — existing compliance map
+### Ronit — existing compliance map
 
 **Files:** `Project/tools/schedule_tools.py`,
 `Project/tools/campaign_data_tools.py`
@@ -249,7 +293,7 @@ No language model decides whether a spot breaches a rule.
 
 **What it does:** keeps safety-critical clearance facts deterministic.
 
-### Irulan — existing dashboard map
+### Avinash — existing dashboard map
 
 **Files:** `Project/dashboard/`, `Project/API_DOCUMENTATION.md`
 
@@ -276,20 +320,20 @@ Wednesday and Thursday.
 | Person | Completed work | Files | Tuesday demo |
 |---|---|---|---|
 | Rohan | test and repair existing API/database/auth behavior | `api/`, `persistence/`, `access/` | sign in, authorize Swagger, inspect queue |
-| Chani | verify and repair existing cleaning/model behavior | `data_pipeline/`, `modeling/` | existing cleaned files, report, and metrics |
-| Duncan | verify and repair existing extraction/retrieval behavior | `knowledge/`, `tools/retrieval_tools.py` | existing search returns source text |
-| Gurney | verify and repair existing compliance/workflow behavior | `tools/`, `agentic/` | existing spot result and decision state |
-| Irulan | inspect existing dashboard modules and map missing screens | `dashboard/`, API docs | existing page inventory and UI gap board |
+| Kartiga | verify and repair existing cleaning/model behavior | `data_pipeline/`, `modeling/` | existing cleaned files, report, and metrics |
+| Raghu | verify and repair existing extraction/retrieval behavior | `knowledge/`, `tools/retrieval_tools.py` | existing search returns source text |
+| Ronit | verify and repair existing compliance/workflow behavior | `tools/`, `agentic/` | existing spot result and decision state |
+| Avinash | inspect existing dashboard modules and map missing screens | `dashboard/`, API docs | existing page inventory and UI gap board |
 
 ### Tuesday show-and-tell checklist
 
 | Person | Show this exact visible evidence |
 |---|---|
 | Rohan | current test result for the API area plus Swagger sign-in and queue |
-| Chani | existing `processed\` files, quality report, and model metrics |
-| Duncan | existing retrieval result containing passage text and source document |
-| Gurney | existing campaign profile, schedule row, breach result, and workflow status |
-| Irulan | existing dashboard files, missing-page list, and ordered API journey |
+| Kartiga | existing `processed\` files, quality report, and model metrics |
+| Raghu | existing retrieval result containing passage text and source document |
+| Ronit | existing campaign profile, schedule row, breach result, and workflow status |
+| Avinash | existing dashboard files, missing-page list, and ordered API journey |
 
 Tuesday's deliverable is a verified baseline and gap list. Nobody should create
 duplicate data, PDF, model, API, or dashboard folders.
@@ -318,7 +362,7 @@ authentication, queue, assessment, decision, audit, and chat endpoints.
 **Proof:** open `http://127.0.0.1:8000/docs`, sign in, and use the Swagger
 Authorize button with the returned `X-Session-Token`.
 
-### Chani — verify existing cleaned data
+### Kartiga — verify existing cleaned data
 
 **Paste/run from:** `Project\`
 
@@ -339,7 +383,7 @@ outputs and quality evidence from the supplied raw files.
 **Proof:** five cleaned CSVs appear under `processed\` and the quality report
 appears under `output\`.
 
-### Chani — verify existing model artifacts
+### Kartiga — verify existing model artifacts
 
 **Paste/run from:** `Project\`
 
@@ -361,7 +405,7 @@ than committing generated binaries.
 **Proof:** amendment, exposure, and issue artifacts exist and metrics are
 available for the SME.
 
-### Duncan — verify the existing document index
+### Raghu — verify the existing document index
 
 **Paste/run from:** `Project\`
 
@@ -379,7 +423,7 @@ PDFs and return stable source-linked chunks. Do not copy the PDFs elsewhere.
 **Proof:** a retrieval query returns passage text, document name, chunk ID, and
 distance.
 
-### Gurney — run deterministic campaign tools
+### Ronit — run deterministic campaign tools
 
 **Paste into:** a Python REPL from `Project\`, or a temporary local test file
 that must not be committed.
@@ -415,7 +459,7 @@ module.
 **Proof:** the worked example campaign returns booked spots, breach codes,
 exposure, first transmission, and open decisions.
 
-### Irulan — prepare the UI contract, not the finished UI
+### Avinash — prepare the UI contract, not the finished UI
 
 **Paste/reference:** `Project\TEST_API_EXAMPLES.md`
 
@@ -439,12 +483,12 @@ Wednesday/Thursday work.
 | Person | Work | Files | Demo |
 |---|---|---|---|
 | Rohan | stabilize response shapes and API integration points | `api/`, shared schemas only if approved | API sequence works from a fresh database |
-| Chani | reproducible artifacts and model display data | `modeling/`, training scripts | risk/exposure values shown to UI owner |
-| Duncan | retrieval-backed chat responses and source display | `knowledge/`, chat retrieval tools | answer plus source document |
-| Gurney | workflow integration and final spot summaries | `agentic/`, `tools/` | decision paths produce correct outcomes |
-| Irulan | queue, campaign detail, login/navigation pages | `dashboard/` | Streamlit displays live API data |
+| Kartiga | reproducible artifacts and model display data | `modeling/`, training scripts | risk/exposure values shown to UI owner |
+| Raghu | retrieval-backed chat responses and source display | `knowledge/`, chat retrieval tools | answer plus source document |
+| Ronit | workflow integration and final spot summaries | `agentic/`, `tools/` | decision paths produce correct outcomes |
+| Avinash | queue, campaign detail, login/navigation pages | `dashboard/` | Streamlit displays live API data |
 
-### Irulan's Wednesday paste/run commands
+### Avinash's Wednesday paste/run commands
 
 ```powershell
 python -m streamlit run dashboard/clearance_queue.py
@@ -460,10 +504,10 @@ The dashboard must use `dashboard/api_client.py`; it must not import
 | Person | Work | Demo |
 |---|---|---|
 | Rohan | final auth/role/audit/decision integration | controller can decide only through permitted path |
-| Chani | score bands, edge cases, artifact regeneration | risk cards agree with model outputs |
-| Duncan | chat memory, refusal, source attribution | unsupported questions are refused |
-| Gurney | checkpoint resume and all three decision routes | CLEAR, RESTRICT, REJECT demos |
-| Irulan | decision queue, audit trail, chat panel, role pages | full Streamlit clearance journey |
+| Kartiga | score bands, edge cases, artifact regeneration | risk cards agree with model outputs |
+| Raghu | chat memory, refusal, source attribution | unsupported questions are refused |
+| Ronit | checkpoint resume and all three decision routes | CLEAR, RESTRICT, REJECT demos |
+| Avinash | decision queue, audit trail, chat panel, role pages | full Streamlit clearance journey |
 
 ### Thursday acceptance journey
 
