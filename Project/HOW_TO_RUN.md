@@ -44,8 +44,9 @@ The project reads `.env` from the `Project` directory. Never commit `.env`; the
 repository `.gitignore` excludes it. Do not commit secrets or replace values with
 publicly visible credentials.
 
-The Gemini variables are optional. Without a configured model key, the project uses its
-deterministic fallback behavior for local testing.
+The Gemini variables configure generated answers from the clearance assistant. When the
+Gemini service is unavailable or disabled for testing, the assistant shows a clearly marked
+excerpt selected from the retrieved policy documents instead of inventing an answer.
 
 ## 5. Prepare project data
 
@@ -83,8 +84,13 @@ Model files, schemas, and metrics are written under `output\models\` and `output
 From the `Project` directory:
 
 ```powershell
-python -m pytest ..\pytest\tests.py -q
+$env:BREAKCHECK_CHAT_OFFLINE = "1"
+python -m pytest ..\pytest\tests.py tests -q
+Remove-Item Env:BREAKCHECK_CHAT_OFFLINE
 ```
+
+This keeps acceptance tests repeatable and avoids calling the configured model. Omit the
+offline variable when manually checking live generated answers.
 
 The test suite is the acceptance contract for the project. A successful run currently
 reports all tests passing.
