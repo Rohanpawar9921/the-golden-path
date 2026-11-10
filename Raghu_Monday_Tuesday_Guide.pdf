@@ -1,0 +1,94 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [4 0 R 6 0 R] /Count 2 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 2644 >>
+stream
+BT /F1 18 Tf 54 750 Td (RAGHU | POLICY DOCUMENTS AND RETRIEVAL) Tj ET
+BT /F1 14 Tf 54 733 Td (Meeting purpose) Tj ET
+BT /F1 10 Tf 54 716 Td (Monday maps the supplied policy documents and the existing knowledge) Tj ET
+BT /F1 10 Tf 54 703 Td (layer. Tuesday verifies extraction and retrieval, including source) Tj ET
+BT /F1 10 Tf 54 690 Td (attribution. Show that answers can be traced to the supplied material.) Tj ET
+BT /F1 14 Tf 54 669 Td (Suggested meeting script) Tj ET
+BT /F1 10 Tf 54 652 Td ("I mapped the supplied policy PDFs to the existing extraction and search) Tj ET
+BT /F1 10 Tf 54 639 Td (code. The knowledge layer extracts text, splits it into passages, stores) Tj ET
+BT /F1 10 Tf 54 626 Td (document metadata in the vector index, and retrieves source-linked text.) Tj ET
+BT /F1 10 Tf 54 613 Td (I checked that the result identifies its source and that category code) Tj ET
+BT /F1 10 Tf 54 600 Td (content stays scoped to the relevant question.") Tj ET
+BT /F1 14 Tf 54 579 Td (What to explain and show) Tj ET
+BT /F1 10 Tf 54 562 Td (- Why: policy answers need traceable source passages, not unsupported) Tj ET
+BT /F1 10 Tf 54 549 Td (  general answers or passages from the wrong document.) Tj ET
+BT /F1 10 Tf 54 536 Td (- What: PDF extraction, chunk splitting, vector indexing, code reading,) Tj ET
+BT /F1 10 Tf 54 523 Td (  and retrieval tools; identify changed source files, if any.) Tj ET
+BT /F1 10 Tf 54 510 Td (- How: rebuild the index, run a retrieval query, and show the passage,) Tj ET
+BT /F1 10 Tf 54 497 Td (  document name, chunk ID, and distance.) Tj ET
+BT /F1 14 Tf 54 476 Td (Inputs -> outputs) Tj ET
+BT /F1 10 Tf 54 459 Td (Inputs: 16 supplied PDFs in Project/data/docs/.) Tj ET
+BT /F1 10 Tf 54 446 Td (Outputs: extracted text, sections/chunks with source metadata, and the) Tj ET
+BT /F1 10 Tf 54 433 Td (local Chroma vector index under Project/database/chroma_store/.) Tj ET
+BT /F1 14 Tf 54 412 Td (Document files) Tj ET
+BT /F1 9 Tf 54 395 Td (Advertising-Clearance-Policy.pdf; Code-Alcohol.pdf; Code-Betting-And-Gaming.pdf;) Tj ET
+BT /F1 9 Tf 54 382 Td (Code-Consumer-Credit.pdf; Code-Less-Healthy-Food.pdf; Code-Medicines-And-Health.pdf;) Tj ET
+BT /F1 9 Tf 54 369 Td (Guide-Alcohol-And-Social-Success.pdf; Guide-Appeal-To-Under-18s.pdf;) Tj ET
+BT /F1 9 Tf 54 356 Td (Guide-Comparative-Claims.pdf; Guide-Environmental-Claims.pdf;) Tj ET
+BT /F1 9 Tf 54 343 Td (Guide-Financial-Promotions.pdf; Guide-Gambling-Inducements.pdf;) Tj ET
+BT /F1 9 Tf 54 330 Td (Guide-Health-Claims.pdf; Guide-Price-And-Offer-Claims.pdf;) Tj ET
+BT /F1 9 Tf 54 317 Td (Past-Clearances-Casebook.pdf; Scheduling-And-Audience-Rules.pdf.) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 7 0 R >>
+endobj
+7 0 obj
+<< /Length 1649 >>
+stream
+BT /F1 18 Tf 54 750 Td (FILES AND DEMO) Tj ET
+BT /F1 14 Tf 54 733 Td (Code files) Tj ET
+BT /F1 10 Tf 54 716 Td (Project/knowledge/chunk_splitting.py) Tj ET
+BT /F1 10 Tf 54 703 Td (Project/knowledge/code_reading.py) Tj ET
+BT /F1 10 Tf 54 690 Td (Project/knowledge/pdf_extraction.py) Tj ET
+BT /F1 10 Tf 54 677 Td (Project/knowledge/vector_index.py) Tj ET
+BT /F1 10 Tf 54 664 Td (Project/tools/retrieval_tools.py) Tj ET
+BT /F1 10 Tf 54 651 Td (Project/run_knowledge_indexing.py) Tj ET
+BT /F1 14 Tf 54 630 Td (Run from Project in PowerShell) Tj ET
+BT /F1 10 Tf 54 613 Td (Rebuild the index when needed:) Tj ET
+BT /F1 10 Tf 54 600 Td (    python run_knowledge_indexing.py) Tj ET
+BT /F1 10 Tf 54 587 Td (    Get-ChildItem database\\chroma_store) Tj ET
+BT /F1 10 Tf 54 574 Td (Then run a retrieval query through the existing tool or chat flow.) Tj ET
+BT /F1 10 Tf 54 561 Td (Show passage text, source document, chunk ID, and distance. Avoid) Tj ET
+BT /F1 10 Tf 54 548 Td (copying PDFs to another location; use the supplied source folder.) Tj ET
+BT /F1 14 Tf 54 527 Td (What counts as a useful result) Tj ET
+BT /F1 10 Tf 54 510 Td (A clear query returns relevant passage text and names the document it) Tj ET
+BT /F1 10 Tf 54 497 Td (came from. A category-code question should retrieve the correct code) Tj ET
+BT /F1 10 Tf 54 484 Td (document. Explain any excluded-document rule in the current design.) Tj ET
+BT /F1 14 Tf 54 463 Td (Meeting close) Tj ET
+BT /F1 10 Tf 54 446 Td (Summarize the baseline, any retrieval gap found, and the evidence from) Tj ET
+BT /F1 10 Tf 54 433 Td (the query. Tuesday's output is a verified source-linked retrieval path.) Tj ET
+endstream
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000127 00000 n 
+0000000224 00000 n 
+0000000350 00000 n 
+0000003046 00000 n 
+0000003172 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R >>
+startxref
+4873
+%%EOF

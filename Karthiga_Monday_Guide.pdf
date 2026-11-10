@@ -1,0 +1,110 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [4 0 R 6 0 R] /Count 2 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 2338 >>
+stream
+BT /F1 18 Tf 54 750 Td (KARTHIGA | MONDAY WORK AND DEMO) Tj ET
+BT /F1 14 Tf 54 733 Td (Purpose) Tj ET
+BT /F1 10 Tf 54 716 Td (Monday is a baseline review: understand the existing data cleaning and model training flow,) Tj ET
+BT /F1 10 Tf 54 703 Td (identify gaps, and avoid rebuilding components that already exist. Be clear about what the) Tj ET
+BT /F1 10 Tf 54 690 Td (Monday commit actually changed; describe inspection/documentation separately from code edits.) Tj ET
+BT /F1 14 Tf 54 669 Td (Suggested meeting script) Tj ET
+BT /F1 10 Tf 54 652 Td ("I reviewed the project's existing data preparation and modeling flow to establish what was) Tj ET
+BT /F1 10 Tf 54 639 Td (already in place before we make changes. I traced how supplied CSV data becomes cleaned) Tj ET
+BT /F1 10 Tf 54 626 Td (datasets and model artifacts, and noted gaps that could affect the team. Monday was for) Tj ET
+BT /F1 10 Tf 54 613 Td (understanding and documenting the current system, not building a duplicate pipeline.") Tj ET
+BT /F1 14 Tf 54 592 Td (What to explain) Tj ET
+BT /F1 10 Tf 54 575 Td (- What: reviewed data_pipeline and modeling modules plus the two run scripts.) Tj ET
+BT /F1 10 Tf 54 562 Td (- How: traced raw CSVs through cleaning, feature building, quality reporting, training, and) Tj ET
+BT /F1 10 Tf 54 549 Td (  artifact saving. If code was changed, point to each changed file and explain the fix.) Tj ET
+BT /F1 10 Tf 54 536 Td (- Why: give the team an accurate baseline and focus Tuesday's verification on real gaps.) Tj ET
+BT /F1 14 Tf 54 515 Td (Show this flow) Tj ET
+BT /F1 11 Tf 54 498 Td (Raw CSV files -> cleaning/features -> cleaned CSVs + quality report) Tj ET
+BT /F1 11 Tf 54 485 Td (                 -> model training -> saved models/schemas + metrics) Tj ET
+BT /F1 14 Tf 54 464 Td (Monday files reviewed) Tj ET
+BT /F1 9 Tf 54 447 Td (Project/data_pipeline/__init__.py, audience_cleaning.py, common_cleaning.py,) Tj ET
+BT /F1 9 Tf 54 434 Td (dataset_loader.py, feature_builder.py, note_cleaning.py, quality_profiler.py,) Tj ET
+BT /F1 9 Tf 54 421 Td (submission_cleaning.py; Project/modeling/_common.py, amendment_model.py, exposure_model.py,) Tj ET
+BT /F1 9 Tf 54 408 Td (issue_model.py, model_evaluation.py, model_registry.py; Project/run_data_pipeline.py and) Tj ET
+BT /F1 9 Tf 54 395 Td (Project/run_model_training.py.) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 7 0 R >>
+endobj
+7 0 obj
+<< /Length 3178 >>
+stream
+BT /F1 18 Tf 54 750 Td (INPUTS AND OUTPUTS) Tj ET
+BT /F1 14 Tf 54 733 Td (Data pipeline inputs - Project/data/) Tj ET
+BT /F1 10 Tf 54 716 Td (- campaign_submissions_train.csv) Tj ET
+BT /F1 10 Tf 54 703 Td (- campaign_submissions_eval.csv) Tj ET
+BT /F1 10 Tf 54 690 Td (- programme_audiences_train.csv) Tj ET
+BT /F1 10 Tf 54 677 Td (- programme_audiences_eval.csv) Tj ET
+BT /F1 10 Tf 54 664 Td (- clearance_notes.csv) Tj ET
+BT /F1 14 Tf 54 643 Td (Additional live service inputs - Project/data/input/) Tj ET
+BT /F1 10 Tf 54 626 Td (- booked_spots.csv) Tj ET
+BT /F1 10 Tf 54 613 Td (- open_campaign_notes.csv) Tj ET
+BT /F1 10 Tf 54 600 Td (- open_campaigns.csv) Tj ET
+BT /F1 10 Tf 54 587 Td (- programme_schedule.csv) Tj ET
+BT /F1 9 Tf 54 574 Td (These are used by the live queue/tools, not the five-file cleaning pipeline above.) Tj ET
+BT /F1 14 Tf 54 553 Td (Data pipeline outputs) Tj ET
+BT /F1 10 Tf 54 536 Td (Project/processed/campaign_submissions_train_clean.csv) Tj ET
+BT /F1 10 Tf 54 523 Td (Project/processed/campaign_submissions_eval_clean.csv) Tj ET
+BT /F1 10 Tf 54 510 Td (Project/processed/programme_audiences_train_clean.csv) Tj ET
+BT /F1 10 Tf 54 497 Td (Project/processed/programme_audiences_eval_clean.csv) Tj ET
+BT /F1 10 Tf 54 484 Td (Project/processed/clearance_notes_clean.csv) Tj ET
+BT /F1 10 Tf 54 471 Td (Project/output/data_quality_report.json) Tj ET
+BT /F1 14 Tf 54 450 Td (Model training outputs) Tj ET
+BT /F1 10 Tf 54 433 Td (Project/output/models/amendment_model.pkl) Tj ET
+BT /F1 10 Tf 54 420 Td (Project/output/models/amendment_features.json) Tj ET
+BT /F1 10 Tf 54 407 Td (Project/output/models/exposure_model.pkl) Tj ET
+BT /F1 10 Tf 54 394 Td (Project/output/models/exposure_features.json) Tj ET
+BT /F1 10 Tf 54 381 Td (Project/output/models/issue_model.pkl) Tj ET
+BT /F1 10 Tf 54 368 Td (Project/output/model_metrics.json) Tj ET
+BT /F1 14 Tf 54 347 Td (How to run after pasting changes) Tj ET
+BT /F1 10 Tf 54 330 Td (Open PowerShell in Project. For data-cleaning changes, run:) Tj ET
+BT /F1 10 Tf 54 317 Td (    python run_data_pipeline.py) Tj ET
+BT /F1 10 Tf 54 304 Td (For modeling/training changes, regenerate data first, then train:) Tj ET
+BT /F1 10 Tf 54 291 Td (    python run_data_pipeline.py) Tj ET
+BT /F1 10 Tf 54 278 Td (    python run_model_training.py) Tj ET
+BT /F1 10 Tf 54 265 Td (Run the acceptance suite afterward:) Tj ET
+BT /F1 10 Tf 54 252 Td (    python -m pytest ..\\pytest\\tests.py -q) Tj ET
+BT /F1 10 Tf 54 239 Td (If using the project virtual environment, activate it first:) Tj ET
+BT /F1 10 Tf 54 226 Td (    .\\.venv\\Scripts\\Activate.ps1) Tj ET
+BT /F1 14 Tf 54 205 Td (Demo commands \(from Project\)) Tj ET
+BT /F1 10 Tf 54 188 Td (    Get-ChildItem processed) Tj ET
+BT /F1 10 Tf 54 175 Td (    Get-Content output\\data_quality_report.json) Tj ET
+BT /F1 10 Tf 54 162 Td (    Get-ChildItem output\\models) Tj ET
+BT /F1 10 Tf 54 149 Td (    Get-Content output\\model_metrics.json) Tj ET
+BT /F1 10 Tf 54 136 Td (Close: Monday's result is a documented baseline and gap list; Tuesday verifies and repairs) Tj ET
+BT /F1 10 Tf 54 123 Td (the existing implementation. Show actual outputs and metrics from the current run.) Tj ET
+endstream
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000127 00000 n 
+0000000224 00000 n 
+0000000350 00000 n 
+0000002740 00000 n 
+0000002866 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R >>
+startxref
+6096
+%%EOF

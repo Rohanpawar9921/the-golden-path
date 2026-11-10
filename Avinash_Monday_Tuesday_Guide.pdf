@@ -1,0 +1,87 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [4 0 R 6 0 R] /Count 2 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 1944 >>
+stream
+BT /F1 18 Tf 54 750 Td (AVINASH | DASHBOARD AND USER JOURNEY) Tj ET
+BT /F1 14 Tf 54 733 Td (Meeting purpose) Tj ET
+BT /F1 10 Tf 54 716 Td (Monday and Tuesday establish the existing dashboard baseline and the) Tj ET
+BT /F1 10 Tf 54 703 Td (API contract. The full Streamlit screens are planned for Wednesday and) Tj ET
+BT /F1 10 Tf 54 690 Td (Thursday, so present current pages and gaps accurately.) Tj ET
+BT /F1 14 Tf 54 669 Td (Suggested meeting script) Tj ET
+BT /F1 10 Tf 54 652 Td ("I reviewed the existing dashboard modules and the API documentation to) Tj ET
+BT /F1 10 Tf 54 639 Td (map the user journey and identify missing screens. The dashboard gets) Tj ET
+BT /F1 10 Tf 54 626 Td (campaign facts from the REST API; it should not read CSVs, PDFs, or the) Tj ET
+BT /F1 10 Tf 54 613 Td (database directly, and it should not duplicate backend clearance rules.) Tj ET
+BT /F1 10 Tf 54 600 Td (I will use the ordered API flow as the contract for the UI.") Tj ET
+BT /F1 14 Tf 54 579 Td (What to explain and show) Tj ET
+BT /F1 10 Tf 54 562 Td (- Why: keep one trusted source for campaign facts and business rules.) Tj ET
+BT /F1 10 Tf 54 549 Td (- What: inspected API client, queue, detail, decision queue, audit, and) Tj ET
+BT /F1 10 Tf 54 536 Td (  chat modules; list any changed files and the reason for each change.) Tj ET
+BT /F1 10 Tf 54 523 Td (- How: walk through the API journey, mark existing screens and gaps,) Tj ET
+BT /F1 10 Tf 54 510 Td (  and show the API-backed page inventory.) Tj ET
+BT /F1 14 Tf 54 489 Td (Inputs -> outputs) Tj ET
+BT /F1 10 Tf 54 472 Td (Inputs: API base URL, authenticated session token, and API JSON responses) Tj ET
+BT /F1 10 Tf 54 459 Td (for queue, campaign detail, clearances, decisions, audit, and chat.) Tj ET
+BT /F1 10 Tf 54 446 Td (Outputs: dashboard pages for queue/detail, decisions, audit, and chat;) Tj ET
+BT /F1 10 Tf 54 433 Td (visible loading, error, and role-aware states as appropriate.) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 7 0 R >>
+endobj
+7 0 obj
+<< /Length 1735 >>
+stream
+BT /F1 18 Tf 54 750 Td (FILES AND DEMO) Tj ET
+BT /F1 14 Tf 54 733 Td (Dashboard files) Tj ET
+BT /F1 10 Tf 54 716 Td (Project/dashboard/api_client.py) Tj ET
+BT /F1 10 Tf 54 703 Td (Project/dashboard/audit_trail.py) Tj ET
+BT /F1 10 Tf 54 690 Td (Project/dashboard/campaign_detail.py) Tj ET
+BT /F1 10 Tf 54 677 Td (Project/dashboard/clearance_chat.py) Tj ET
+BT /F1 10 Tf 54 664 Td (Project/dashboard/clearance_queue.py) Tj ET
+BT /F1 10 Tf 54 651 Td (Project/dashboard/decision_queue.py) Tj ET
+BT /F1 10 Tf 54 638 Td (Project/run_dashboard.py) Tj ET
+BT /F1 10 Tf 54 625 Td (Project/API_DOCUMENTATION.md) Tj ET
+BT /F1 10 Tf 54 612 Td (Project/TEST_API_EXAMPLES.md) Tj ET
+BT /F1 14 Tf 54 591 Td (Ordered API journey) Tj ET
+BT /F1 10 Tf 54 574 Td (Sign in -> queue -> campaign detail -> create assessment -> pending) Tj ET
+BT /F1 10 Tf 54 561 Td (clearances -> assessment detail -> model calls -> second controller) Tj ET
+BT /F1 10 Tf 54 548 Td (sign-in -> decision -> final detail -> audit -> chat.) Tj ET
+BT /F1 14 Tf 54 527 Td (Run from Project \(API in another PowerShell window\)) Tj ET
+BT /F1 9 Tf 54 510 Td (    python -m uvicorn api.routes:service_application --host 127.0.0.1 --port 8000) Tj ET
+BT /F1 10 Tf 54 497 Td (    python -m streamlit run dashboard/clearance_queue.py) Tj ET
+BT /F1 10 Tf 54 484 Td (Use TEST_API_EXAMPLES.md and Swagger at /docs to demonstrate the) Tj ET
+BT /F1 10 Tf 54 471 Td (endpoint sequence. Explain which pages exist and which remain planned.) Tj ET
+BT /F1 14 Tf 54 450 Td (Presentation tip) Tj ET
+BT /F1 10 Tf 54 433 Td (Show the API response behind a page and how the UI presents it. Avoid) Tj ET
+BT /F1 10 Tf 54 420 Td (claiming missing screens are complete; show the gap board and next step.) Tj ET
+endstream
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000127 00000 n 
+0000000224 00000 n 
+0000000350 00000 n 
+0000002346 00000 n 
+0000002472 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R >>
+startxref
+4259
+%%EOF

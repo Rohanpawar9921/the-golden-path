@@ -1,0 +1,88 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [4 0 R 6 0 R] /Count 2 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 2060 >>
+stream
+BT /F1 18 Tf 54 750 Td (ROHAN | API, DATABASE AND AUTH) Tj ET
+BT /F1 14 Tf 54 733 Td (Meeting purpose) Tj ET
+BT /F1 10 Tf 54 716 Td (Present Monday as the project baseline and Tuesday as focused verification) Tj ET
+BT /F1 10 Tf 54 703 Td (of API, database, and authentication behavior. Explain what was already) Tj ET
+BT /F1 10 Tf 54 690 Td (implemented, what was checked or repaired, and show the API working.) Tj ET
+BT /F1 14 Tf 54 669 Td (Suggested meeting script) Tj ET
+BT /F1 10 Tf 54 652 Td ("I mapped the existing API, persistence, and authentication flow against) Tj ET
+BT /F1 10 Tf 54 639 Td (the acceptance contract. I verified that seeded users can sign in, that) Tj ET
+BT /F1 10 Tf 54 626 Td (their roles control which areas they can reach, and that the queue can be) Tj ET
+BT /F1 10 Tf 54 613 Td (read through the authenticated API. My goal was to establish a working) Tj ET
+BT /F1 10 Tf 54 600 Td (backend baseline and make focused repairs where behavior did not match.") Tj ET
+BT /F1 14 Tf 54 579 Td (What to explain and show) Tj ET
+BT /F1 10 Tf 54 562 Td (- Why: auth, role access, persistence, and API responses support the) Tj ET
+BT /F1 10 Tf 54 549 Td (  clearance flow and give the dashboard a stable contract.) Tj ET
+BT /F1 10 Tf 54 536 Td (- What: API routes/schemas, database models/repository, and permission) Tj ET
+BT /F1 10 Tf 54 523 Td (  and password handling; identify the exact files changed in the commit.) Tj ET
+BT /F1 10 Tf 54 510 Td (- How: seed the local database, start the service, sign in, authorize) Tj ET
+BT /F1 10 Tf 54 497 Td (  Swagger with the token, and request the queue.) Tj ET
+BT /F1 14 Tf 54 476 Td (Inputs -> outputs) Tj ET
+BT /F1 10 Tf 54 459 Td (Inputs: sign-in JSON, session-token header, API request parameters, and) Tj ET
+BT /F1 10 Tf 54 446 Td (local SQLite database seeded from the supplied campaign data.) Tj ET
+BT /F1 10 Tf 54 433 Td (Outputs: session token, role-checked API responses, campaign queue, and) Tj ET
+BT /F1 10 Tf 54 420 Td (persisted assessment, decision, audit, and chat records.) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 7 0 R >>
+endobj
+7 0 obj
+<< /Length 1626 >>
+stream
+BT /F1 18 Tf 54 750 Td (FILES AND DEMO) Tj ET
+BT /F1 14 Tf 54 733 Td (Files to name) Tj ET
+BT /F1 10 Tf 54 716 Td (Project/api/routes.py) Tj ET
+BT /F1 10 Tf 54 703 Td (Project/api/schemas.py) Tj ET
+BT /F1 10 Tf 54 690 Td (Project/persistence/database.py) Tj ET
+BT /F1 10 Tf 54 677 Td (Project/persistence/models.py) Tj ET
+BT /F1 10 Tf 54 664 Td (Project/persistence/repository.py) Tj ET
+BT /F1 10 Tf 54 651 Td (Project/access/password_security.py) Tj ET
+BT /F1 10 Tf 54 638 Td (Project/access/permissions.py) Tj ET
+BT /F1 10 Tf 54 625 Td (Project/run_database_setup.py) Tj ET
+BT /F1 10 Tf 54 612 Td (Project/run_api_service.py) Tj ET
+BT /F1 10 Tf 54 599 Td (Project/API_DOCUMENTATION.md) Tj ET
+BT /F1 14 Tf 54 578 Td (Run from Project in PowerShell) Tj ET
+BT /F1 10 Tf 54 561 Td (    python run_database_setup.py) Tj ET
+BT /F1 9 Tf 54 548 Td (    python -m uvicorn api.routes:service_application --host 127.0.0.1 --port 8000) Tj ET
+BT /F1 10 Tf 54 535 Td (Open http://127.0.0.1:8000/docs. Sign in with a seeded test user,) Tj ET
+BT /F1 10 Tf 54 522 Td (authorize with the returned X-Session-Token, then call GET /queue.) Tj ET
+BT /F1 10 Tf 54 509 Td (Example test accounts: tom / 22222222 \(Executive\), owen / 11111111) Tj ET
+BT /F1 10 Tf 54 496 Td (\(Controller\). Use different roles to demonstrate access boundaries.) Tj ET
+BT /F1 14 Tf 54 475 Td (Validation) Tj ET
+BT /F1 10 Tf 54 458 Td (    python -m pytest ..\\pytest\\tests.py -q) Tj ET
+BT /F1 10 Tf 54 445 Td (Show the Swagger response and the test result. State which response) Tj ET
+BT /F1 10 Tf 54 432 Td (or behavior each changed file was intended to fix.) Tj ET
+endstream
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000127 00000 n 
+0000000224 00000 n 
+0000000350 00000 n 
+0000002462 00000 n 
+0000002588 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R >>
+startxref
+4266
+%%EOF

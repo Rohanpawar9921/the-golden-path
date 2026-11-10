@@ -1,0 +1,95 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [4 0 R 6 0 R] /Count 2 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 2071 >>
+stream
+BT /F1 18 Tf 54 750 Td (RONIT | DETERMINISTIC COMPLIANCE AND WORKFLOW) Tj ET
+BT /F1 14 Tf 54 733 Td (Meeting purpose) Tj ET
+BT /F1 10 Tf 54 716 Td (Monday maps the existing deterministic compliance tools. Tuesday) Tj ET
+BT /F1 10 Tf 54 703 Td (verifies the campaign and schedule facts and how those feed the workflow.) Tj ET
+BT /F1 10 Tf 54 690 Td (Show exactly how a spot is checked; do not describe an LLM as deciding) Tj ET
+BT /F1 10 Tf 54 677 Td (whether a spot breaches a rule.) Tj ET
+BT /F1 14 Tf 54 656 Td (Suggested meeting script) Tj ET
+BT /F1 10 Tf 54 639 Td ("I traced how the supplied campaign, booked-spot, and schedule data become) Tj ET
+BT /F1 10 Tf 54 626 Td (a campaign profile and spot-level compliance result. Each spot is checked) Tj ET
+BT /F1 10 Tf 54 613 Td (deterministically in order: WINDOW, INDEX, CHILDREN, FREQUENCY, then) Tj ET
+BT /F1 10 Tf 54 600 Td (SEPARATION. These facts support the assessment workflow, while the final) Tj ET
+BT /F1 10 Tf 54 587 Td (human decision remains with an authorized controller.") Tj ET
+BT /F1 14 Tf 54 566 Td (What to explain and show) Tj ET
+BT /F1 10 Tf 54 549 Td (- Why: scheduling rules are safety-critical and need repeatable checks.) Tj ET
+BT /F1 10 Tf 54 536 Td (- What: campaign data, spot scheduling, prediction, and workflow modules;) Tj ET
+BT /F1 10 Tf 54 523 Td (  identify the exact files changed and the issue each change addressed.) Tj ET
+BT /F1 10 Tf 54 510 Td (- How: load the live inputs, select a campaign, fetch its spots/schedule,) Tj ET
+BT /F1 10 Tf 54 497 Td (  then show the profile, breach codes, exposure, and decision state.) Tj ET
+BT /F1 14 Tf 54 476 Td (Inputs -> outputs) Tj ET
+BT /F1 10 Tf 54 459 Td (Inputs: open_campaigns.csv, booked_spots.csv, programme_schedule.csv,) Tj ET
+BT /F1 10 Tf 54 446 Td (open_campaign_notes.csv, plus category code passages from retrieval.) Tj ET
+BT /F1 10 Tf 54 433 Td (Outputs: campaign profile, schedule rows, per-spot breach checks,) Tj ET
+BT /F1 10 Tf 54 420 Td (exposure/first transmission facts, and workflow assessment/decision state.) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 7 0 R >>
+endobj
+7 0 obj
+<< /Length 2261 >>
+stream
+BT /F1 18 Tf 54 750 Td (FILES AND DEMO) Tj ET
+BT /F1 14 Tf 54 733 Td (Code files) Tj ET
+BT /F1 10 Tf 54 716 Td (Project/tools/campaign_data_tools.py) Tj ET
+BT /F1 10 Tf 54 703 Td (Project/tools/prediction_tools.py) Tj ET
+BT /F1 10 Tf 54 690 Td (Project/tools/retrieval_tools.py) Tj ET
+BT /F1 10 Tf 54 677 Td (Project/tools/schedule_tools.py) Tj ET
+BT /F1 10 Tf 54 664 Td (Project/agentic/agents.py) Tj ET
+BT /F1 10 Tf 54 651 Td (Project/agentic/graph.py) Tj ET
+BT /F1 10 Tf 54 638 Td (Project/agentic/nodes.py) Tj ET
+BT /F1 10 Tf 54 625 Td (Project/agentic/state.py) Tj ET
+BT /F1 14 Tf 54 604 Td (Live input files) Tj ET
+BT /F1 10 Tf 54 587 Td (Project/data/input/open_campaigns.csv) Tj ET
+BT /F1 10 Tf 54 574 Td (Project/data/input/booked_spots.csv) Tj ET
+BT /F1 10 Tf 54 561 Td (Project/data/input/programme_schedule.csv) Tj ET
+BT /F1 10 Tf 54 548 Td (Project/data/input/open_campaign_notes.csv) Tj ET
+BT /F1 14 Tf 54 527 Td (Run demo from Project PowerShell) Tj ET
+BT /F1 10 Tf 54 510 Td (Start Python with python, then load the live tables:) Tj ET
+BT /F1 10 Tf 54 497 Td (    from config import config) Tj ET
+BT /F1 9 Tf 54 484 Td (    from data_pipeline.dataset_loader import load_raw_dataset) Tj ET
+BT /F1 9 Tf 54 471 Td (    from tools.campaign_data_tools import fetch_campaign_profile,) Tj ET
+BT /F1 9 Tf 54 458 Td (        fetch_campaign_spots, fetch_campaign_schedules) Tj ET
+BT /F1 9 Tf 54 445 Td (    campaigns = load_raw_dataset\(config.OPEN_CAMPAIGNS_FILE\)) Tj ET
+BT /F1 9 Tf 54 432 Td (    spots = load_raw_dataset\(config.BOOKED_SPOTS_FILE\)) Tj ET
+BT /F1 9 Tf 54 419 Td (    reference = str\(campaigns.iloc[0][config.CAMPAIGN_REFERENCE_COLUMN]\)) Tj ET
+BT /F1 9 Tf 54 406 Td (    profile = fetch_campaign_profile\(campaigns, reference\)) Tj ET
+BT /F1 9 Tf 54 393 Td (    campaign_spots = fetch_campaign_spots\(spots, reference\)) Tj ET
+BT /F1 9 Tf 54 380 Td (    schedule = load_raw_dataset\(config.PROGRAMME_SCHEDULE_FILE\)) Tj ET
+BT /F1 9 Tf 54 367 Td (    campaign_schedule = fetch_campaign_schedules\(schedule, campaign_spots\)) Tj ET
+BT /F1 10 Tf 54 346 Td (Show profile/reference, booked spot count, schedule rows, breach codes,) Tj ET
+BT /F1 10 Tf 54 333 Td (exposure, first transmission, and the workflow status where available.) Tj ET
+endstream
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000127 00000 n 
+0000000224 00000 n 
+0000000350 00000 n 
+0000002473 00000 n 
+0000002599 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R >>
+startxref
+4912
+%%EOF
