@@ -1,4 +1,5 @@
 import uuid, time, pandas as pd
+from functools import lru_cache
 from pathlib import Path
 from typing import Optional, List
 from fastapi import APIRouter, Depends, Header, HTTPException, FastAPI, Security
@@ -6,6 +7,10 @@ from fastapi.security import APIKeyHeader
 from persistence.database import get_db, init_db
 from persistence.repository import Repository, insert_chat_turn
 from persistence.models import *
+from chat.campaign_status_answer import answer_campaign_status
+from chat.clearance_assistant import answer_from_documents
+from chat.conversation_memory import recall_conversation
+from knowledge.vector_index import open_vector_index
 from access.permissions import can_access_area
 from config import config
 from .schemas import *
@@ -38,6 +43,10 @@ def _data():
     root=Path(__file__).resolve().parents[1]
     c=pd.read_csv(root/"data/input/open_campaigns.csv"); s=pd.read_csv(root/"data/input/booked_spots.csv")
     return c,s
+
+@lru_cache(maxsize=1)
+def _chat_knowledge_base():
+    return open_vector_index(config.VECTOR_STORE_DIRECTORY)
 def _queue():
     c,s=_data(); rows=[]
     for _,r in c.iterrows():
@@ -178,16 +187,44 @@ def audit(user=Depends(current_user), db=Depends(get_db), limit=200):
              "created_at": x.created_at} for x in rows]
 @router.get("/chat/turns")
 def turns(user=Depends(current_user),db=Depends(get_db),turn_limit=20):
-    return [{"turn_id":x.id,"question_text":x.question_text,"question_type":x.question_type,"answer_text":x.answer_text,"was_refused":x.was_refused,"closest_distance":x.closest_distance,"source_documents":(x.source_documents or "").split(",") if x.source_documents else []} for x in db.query(ChatTurn).filter_by(username=user.username).order_by(ChatTurn.id.desc()).limit(turn_limit)]
+    return [{"turn_id":x.id,"question_text":x.question_text,"question_type":x.question_type,"answer_text":x.answer_text,"was_refused":x.was_refused,"closest_distance":x.closest_distance,"source_documents":[name.strip() for name in x.source_documents.split(",") if name.strip()] if x.source_documents else []} for x in db.query(ChatTurn).filter_by(username=user.username).order_by(ChatTurn.id.desc()).limit(turn_limit)]
 @router.get("/audit/chat-turns")
 def audit_chat_turns(user=Depends(current_user), db=Depends(get_db), turn_limit=20):
     guard(user, config.AREA_AUDIT)
     rows = db.query(ChatTurn).order_by(ChatTurn.id.desc()).limit(min(int(turn_limit), config.CHAT_AUDIT_MAX_ROWS)).all()
     return [{"turn_id": x.id, "username": x.username, "question_text": x.question_text,
              "question_type": x.question_type, "answer_text": x.answer_text,
-             "was_refused": x.was_refused, "source_documents": (x.source_documents or "").split(",")
-             if x.source_documents else []} for x in rows]
+             "was_refused": x.was_refused, "source_documents":
+                 [name.strip() for name in x.source_documents.split(",") if name.strip()]
+                 if x.source_documents else []} for x in rows]
 @router.post("/chat/ask")
 def ask(payload:dict,user=Depends(current_user),db=Depends(get_db)):
-    guard(user,config.AREA_CHAT); q=payload.get("question",""); ans={"question_type":config.CHAT_TYPE_CODE_RULES,"campaign_reference":None,"answer":"The alcohol code allows a limited number of spots per channel in a broadcast day.","source_documents":["Code-Alcohol.pdf"],"was_refused":False,"closest_distance":0.2}
-    insert_chat_turn(db,{"username":user.username,"user_role":user.role,"question_text":q,"question_type":ans["question_type"],"answer_text":ans["answer"],"source_documents":",".join(ans["source_documents"]),"closest_distance":ans["closest_distance"],"was_refused":False}); return ans
+    guard(user, config.AREA_CHAT)
+    question_text = payload.get("question", "")
+    if not isinstance(question_text, str) or len(question_text.strip()) < config.CHAT_QUESTION_MINIMUM_CHARACTERS:
+        raise HTTPException(422, "Ask a question of at least "
+                            + str(config.CHAT_QUESTION_MINIMUM_CHARACTERS) + " characters.")
+    question_text = question_text.strip()
+    conversation = recall_conversation(db, user.username, question_text)
+    answer = answer_from_documents(_chat_knowledge_base(), question_text, conversation)
+    if answer["question_type"] == config.CHAT_TYPE_CAMPAIGN_STATUS:
+        campaigns, _ = _data()
+        answer["answer"] = answer_campaign_status(
+            db, campaigns, user, answer.get("campaign_reference")
+        )
+        answer["source_documents"] = []
+        answer["was_refused"] = False
+
+    insert_chat_turn(db, {
+        "username": user.username,
+        "user_role": user.role,
+        "question_text": question_text,
+        "question_type": answer["question_type"],
+        "campaign_reference": answer.get("campaign_reference"),
+        "answer_text": answer["answer"],
+        "source_documents": ", ".join(answer.get("source_documents", [])),
+        "closest_distance": answer.get("closest_distance"),
+        "was_refused": answer.get("was_refused", False),
+    })
+    answer.pop("call_record", None)
+    return answer

@@ -1,5 +1,5 @@
 from datetime import datetime, timezone
-from sqlalchemy import Column, DateTime, String, Text, Boolean, Integer, JSON
+from sqlalchemy import Column, DateTime, String, Text, Boolean, Float, Integer, JSON
 from .database import Base
 def now(): return datetime.now(timezone.utc)
 class UserAccount(Base):
@@ -23,6 +23,6 @@ class LLMCall(Base):
 class AuditEvent(Base):
     __tablename__="audit_events"; id=Column(Integer,primary_key=True); actor=Column(String(80)); action=Column(String(120)); campaign_reference=Column(String(40)); details=Column(JSON,default=dict); created_at=Column(DateTime,default=now)
 class ChatTurn(Base):
-    __tablename__="chat_turns"; id=Column(Integer,primary_key=True); username=Column(String(80),index=True); user_role=Column(String(80)); question_text=Column(Text); question_type=Column(String(80)); campaign_reference=Column(String(40)); answer_text=Column(Text); source_documents=Column(Text); closest_distance=Column(Integer,default=0); was_refused=Column(Boolean,default=False); created_at=Column(DateTime,default=now)
+    __tablename__="chat_turns"; id=Column(Integer,primary_key=True); username=Column(String(80),index=True); user_role=Column(String(80)); question_text=Column(Text); question_type=Column(String(80)); campaign_reference=Column(String(40)); answer_text=Column(Text); source_documents=Column(Text); closest_distance=Column(Float,default=1.0); was_refused=Column(Boolean,default=False); created_at=Column(DateTime,default=now)
 # Names used by the original service contract.
 ClearanceAssessment = Assessment
