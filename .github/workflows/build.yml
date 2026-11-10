@@ -19,9 +19,8 @@ jobs:
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: >-
-            3bcf5f70-82eb-4cbf-b256-8c0040c7f571-874b0f5e-5258-44ae-a384-7a4c24664147
-          SONAR_TOKEN: sqa_bca47d55147cb1b256a213a17c135dfe863be411
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: '${{ secrets.SONAR_HOST_URL }}'
       - name: Trigger API
         if: always()
