@@ -38,3 +38,9 @@ Thumbs.db
 
 # Streamlit local secrets
 .streamlit/secrets.toml
+
+
+# Generated ML artifacts
+Project/output/models/
+Project/modeling/__pycache__/
+*.pyc
