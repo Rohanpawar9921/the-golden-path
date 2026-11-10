@@ -1,15 +1,14 @@
-# BreakCheck AI — Three-Day Push Plan
+# BreakCheck AI — One-Day Push Plan
 
-**Schedule:** Tuesday 10 November to Thursday 12 November 2026
+**Push day:** Tuesday, 10 November 2026 (IST)
 
-**Timezone:** India Standard Time (IST)
-**Deadline:** complete pushes, integration, full-suite run and SME walkthrough by **Thursday 4:00 PM IST**.
+**Goal:** every remaining owner pushes their assigned, ready work today; Rohan integrates it to `main` and the team records any remaining blocker before the day ends.
 
-This replaces the older Monday–Friday plan. Rohan reported the push status below. I checked that the `clean-main` changes are already included in the fetched `origin/main`; the local `main` branch pointer was stale, so new work must be based on current remote `main`.
+This replaces the previous Tuesday–Thursday schedule. The project is already on `main`; today's work is to push remaining owner changes and integrate them. Put each change in its matching repository path. Do not paste source code into this plan or overwrite another owner's files.
 
-## Monday completion
+## Already pushed on Monday
 
-Karthiga reported that she pushed these files on Monday. They are complete; do not ask her to paste or push them again:
+Karthiga reported these files as pushed. They are complete; do not copy or push them again unless an actual fix is needed:
 
 - `Project/data_pipeline/audience_cleaning.py`
 - `Project/data_pipeline/common_cleaning.py`
@@ -21,72 +20,165 @@ Karthiga reported that she pushed these files on Monday. They are complete; do n
 - `Project/run_data_pipeline.py`
 - `Project/tests.py`
 
-Rohan reports that no one else has pushed yet. The four other owners still need their first domain push. Karthiga still owns the model/training files; they were not included in her Monday push.
+## Today's file assignments
 
-## File ownership
+Use the paths exactly as written. If a listed file has no change, leave it alone; do not make a duplicate or empty commit. For a new focused test, create it at the path shown and keep the acceptance suite at `pytest/tests.py` unchanged.
 
-Each person pushes their own changes. The lists below define ownership; stage only files that actually changed.
+### Karthiga — data pipeline and models
 
-| Owner | Files |
-|---|---|
-| Rohan — API, database, access and integration | `Project/api/`, `Project/persistence/`, `Project/access/`, `Project/run_database_setup.py`, `Project/run_api_service.py`, shared setup/API documentation and this plan |
-| Karthiga — data and models | Monday files above are done; remaining `Project/modeling/` and `Project/run_model_training.py` |
-| Raghu — knowledge, retrieval and chat grounding | `Project/knowledge/`, `Project/tools/retrieval_tools.py`, `Project/run_knowledge_indexing.py`, `Project/chat/` |
-| Ronit — campaign checks and workflow | `Project/tools/campaign_data_tools.py`, `Project/tools/prediction_tools.py`, `Project/tools/schedule_tools.py`, `Project/agentic/` |
-| Avinash — dashboard | `Project/dashboard/`, `Project/run_dashboard.py`, `Project/docs/FRONTEND_MANUAL_TESTS.md` |
+**Paste/update and push today:**
 
-**Shared-file locks:** Rohan alone edits `Project/api/schemas.py`, `Project/config/config.py`, `Project/requirements.txt` and shared API docs. Raghu owns `Project/tools/retrieval_tools.py`; Ronit may call it but does not edit it. Do not rewrite Karthiga’s pushed `Project/tests.py` or the acceptance contract `pytest/tests.py`. Add focused tests in the relevant owner’s `Project/tests/` files.
+- `Project/modeling/_common.py`
+- `Project/modeling/amendment_model.py`
+- `Project/modeling/exposure_model.py`
+- `Project/modeling/issue_model.py`
+- `Project/modeling/model_evaluation.py`
+- `Project/modeling/model_registry.py`
+- `Project/run_model_training.py`
+- `Project/docs/Know_Your_Data.md` if the current schema or cleaning behavior needs documenting
+- `Project/tests/test_modeling.py` if adding focused model tests; create this file if needed
 
-Never stage `.env`, databases, model binaries, generated CSVs, the Chroma index, caches, `__pycache__`, or temporary office lock files. Rebuild generated artifacts locally.
+**Data files Karthiga owns:**
 
-## Tuesday 10 November — first domain pushes
+- `Project/data/campaign_submissions_train.csv`
+- `Project/data/campaign_submissions_eval.csv`
+- `Project/data/clearance_notes.csv`
+- `Project/data/programme_audiences_train.csv`
+- `Project/data/programme_audiences_eval.csv`
 
-**By 11:00 PM IST:** each of the four owners without a push submits a branch/PR containing the ready changes in their domain. If a file is unchanged, leave it out rather than creating a no-op commit.
+Only include a CSV if its source data actually changed. Do not regenerate or commit cleaned output, quality-report output, caches, or trained model binaries. The nine Monday files above are already done.
 
-| Person | Files to push | Evidence in the PR |
-|---|---|---|
-| Rohan | Changed files in `Project/api/`, `Project/persistence/`, `Project/access/`; `Project/run_database_setup.py` and `Project/run_api_service.py` if changed. Include applicable current changes such as `Project/api/routes.py` and `Project/persistence/models.py`. | Database setup succeeds; service starts; Swagger sign-in and an authenticated queue request work. |
-| Raghu | Changed files in `Project/knowledge/`, `Project/tools/retrieval_tools.py`, `Project/run_knowledge_indexing.py` and `Project/chat/`. Include applicable current changes such as `Project/knowledge/vector_index.py` and the three `Project/chat/` modules. | Index reads the supplied documents; a policy reply cites its source; an unrelated question is refused. |
-| Ronit | Changed files in `Project/tools/campaign_data_tools.py`, `Project/tools/prediction_tools.py`, `Project/tools/schedule_tools.py` and `Project/agentic/`. | Worked example has deterministic spot results; assessment pauses for a Controller. |
-| Avinash | Changed files in `Project/dashboard/` and `Project/run_dashboard.py`; include `Project/tests/test_dashboard_navigation.py`, `test_home_page.py`, `test_clearance_chat_ui.py` and `Project/docs/FRONTEND_MANUAL_TESTS.md` if changed. | Sign-in, queue, detail and clearance chat render from the service. |
-| Karthiga | Do not repeat the Monday files. Report remaining model files and any blocker by 11:00 PM; prepare the model push for Wednesday. | Model work is clearly listed for Wednesday. |
+**Before handing off:** verify the pipeline can read the five source datasets and training reports the three model metrics and schemas.
 
-At 11:00 PM, Rohan posts the branch/PR name, changed-file list and blocker (if any) for each owner. No one merges a failing change to meet the clock.
+### Raghu — policy knowledge, retrieval, and assistant
 
-## Wednesday 11 November — models and integration
+**Paste/update and push today:**
 
-**By 4:00 PM IST:** all domain PRs are reviewable. **By 6:00 PM:** the first integrated build is green.
+- `Project/knowledge/chunk_splitting.py`
+- `Project/knowledge/code_reading.py`
+- `Project/knowledge/pdf_extraction.py`
+- `Project/knowledge/vector_index.py`
+- `Project/tools/retrieval_tools.py`
+- `Project/run_knowledge_indexing.py`
+- `Project/chat/campaign_status_answer.py`
+- `Project/chat/clearance_assistant.py`
+- `Project/chat/conversation_memory.py`
+- `Project/tests/test_clearance_assistant.py`
 
-| Time | Owner | Push / result |
-|---|---|---|
-| 9:00 AM–12:00 PM | Karthiga | Push changed `Project/modeling/_common.py`, `amendment_model.py`, `exposure_model.py`, `issue_model.py`, `model_evaluation.py`, `model_registry.py`, and `Project/run_model_training.py`. Run data cleaning then training; attach the metrics summary. Do not push generated model files. |
-| By 1:00 PM | Rohan | Push API/auth/persistence fixes and focused API tests if needed. Owns changes to schemas/config. |
-| By 1:00 PM | Raghu | Push retrieval/chat fixes; own `Project/tests/test_clearance_assistant.py` if changed. |
-| By 1:00 PM | Ronit | Push schedule/compliance/workflow fixes and focused workflow tests if needed. |
-| By 2:00 PM | Avinash | Push the full dashboard journey: queue, campaign detail, clearance chat, decision queue, audit, sign-in/navigation and role-aware Home page. Keep `Project/docs/FRONTEND_MANUAL_TESTS.md` current. |
-| By 2:00 PM | Rohan | Push `Project/HOW_TO_RUN.md`, `Project/API_DOCUMENTATION.md`, `Project/TEST_API_EXAMPLES.md`, `Project/docs/unit_testing.md`, `Project/docs/unit_testing.pdf`, `README.md` and this plan where changed. |
-| 2:00–4:00 PM | All owners | Review PRs and fix failures only in owned files. Keep secrets and generated artifacts out. |
-| 4:00–6:00 PM | Rohan integrates | Merge one PR at a time in dependency order: Karthiga → Raghu → Ronit → Rohan → Avinash. Run focused checks after each merge; stop and return a failing PR to its owner. |
+**Policy source files Raghu maintains:**
 
-## Thursday 12 November — final verification and handoff
+- `Project/data/docs/Advertising-Clearance-Policy.pdf`
+- `Project/data/docs/Code-Alcohol.pdf`
+- `Project/data/docs/Code-Betting-And-Gaming.pdf`
+- `Project/data/docs/Code-Consumer-Credit.pdf`
+- `Project/data/docs/Code-Less-Healthy-Food.pdf`
+- `Project/data/docs/Code-Medicines-And-Health.pdf`
+- `Project/data/docs/Guide-Alcohol-And-Social-Success.pdf`
+- `Project/data/docs/Guide-Appeal-To-Under-18s.pdf`
+- `Project/data/docs/Guide-Comparative-Claims.pdf`
+- `Project/data/docs/Guide-Environmental-Claims.pdf`
+- `Project/data/docs/Guide-Financial-Promotions.pdf`
+- `Project/data/docs/Guide-Gambling-Inducements.pdf`
+- `Project/data/docs/Guide-Health-Claims.pdf`
+- `Project/data/docs/Guide-Price-And-Offer-Claims.pdf`
+- `Project/data/docs/Past-Clearances-Casebook.pdf`
+- `Project/data/docs/Scheduling-And-Audience-Rules.pdf`
 
-No new features Thursday. Make only correctness, test or documentation fixes.
+The PDFs are already in the repository. Include them only if the source documents themselves changed; never push a generated vector index. Check that different policy questions retrieve relevant sources, answers cite those sources, and unrelated questions are declined.
 
-| Time | Owner | Must finish |
-|---|---|---|
-| 9:00–11:00 AM | Karthiga | Re-run cleaning/training after any change; verify report, schemas and model minimums; push fixes only to data/model files. |
-| 9:00–11:00 AM | Raghu | Check five distinct code answers, source attribution, follow-up memory and out-of-scope refusal; push retrieval/chat fixes. |
-| 9:00–11:00 AM | Ronit | Check broadcast clock, all five breach rules, exposure/queue order, decision gate and restart/resume; push compliance/workflow fixes. |
-| 9:00–11:00 AM | Avinash | Smoke-check each role’s navigation and the queue → detail → chat/decision/audit flows; push UI fixes. |
-| 9:00–11:00 AM | Rohan | Check sign-in, service-side role checks, API errors, saved assessment/decision and fresh startup; push integration fixes. |
-| 11:00 AM–1:00 PM | All owners | Run the full acceptance and regression suite. Fix failures with the file owner and rerun the entire suite. |
-| 1:00–2:30 PM | All owners | Follow the manual SME guide at `Project/docs/unit_testing.pdf` with a fresh, unassessed campaign for each decision demo. |
-| 2:30–3:30 PM | Rohan | Final merge and clean-start check; confirm all intended pushes are on remote `main` and no secrets or generated files are staged. |
-| 3:30–4:00 PM | Team | Demonstrate queue → detail → assessment pending → different Controller decision → documents/audit → role-scoped chat. Close all blockers by 4:00 PM. |
+### Ronit — campaign checks, scheduling, and workflow
 
-### Full-suite command
+**Paste/update and push today:**
 
-Run in PowerShell from `Project`:
+- `Project/tools/campaign_data_tools.py`
+- `Project/tools/prediction_tools.py`
+- `Project/tools/schedule_tools.py`
+- `Project/agentic/agents.py`
+- `Project/agentic/graph.py`
+- `Project/agentic/nodes.py`
+- `Project/agentic/state.py`
+- `Project/tests/test_campaign_workflow.py` if adding focused workflow tests; create this file if needed
+
+**Campaign and schedule input files Ronit owns:**
+
+- `Project/data/input/booked_spots.csv`
+- `Project/data/input/open_campaign_notes.csv`
+- `Project/data/input/open_campaigns.csv`
+- `Project/data/input/programme_schedule.csv`
+
+Only include a CSV if its source data actually changed. Check that schedule and breach-rule results are repeatable, a clearance assessment pauses for a different Controller, and the allowed decisions are recorded correctly.
+
+### Rohan — API, persistence, access, setup, and integration
+
+**Paste/update and push today:**
+
+- `Project/api/routes.py`
+- `Project/api/schemas.py`
+- `Project/persistence/database.py`
+- `Project/persistence/models.py`
+- `Project/persistence/repository.py`
+- `Project/access/password_security.py`
+- `Project/access/permissions.py`
+- `Project/config/config.py`
+- `Project/.env.example` (names and safe sample values only; never real credentials)
+- `Project/requirements.txt`
+- `Project/run_database_setup.py`
+- `Project/run_api_service.py`
+- `Project/tests/test_api_integration.py` if adding focused API tests; create this file if needed
+- `Project/API_DOCUMENTATION.md`
+- `Project/TEST_API_EXAMPLES.md`
+- `Project/HOW_TO_RUN.md`
+- `Project/docs/unit_testing.md`
+- `Project/docs/unit_testing.pdf`
+- `README.md`
+- `PROJECT_UNDERSTANDING_AND_PLAN.md` if it needs to reflect the completed implementation
+- `5 day war.md` (this plan)
+- `.github/workflows/build.yml` and `sonar-project.properties` only if today's integration requires changes
+
+Rohan integrates owner pushes in dependency order, resolves cross-module issues with the file owner, and confirms each commit reaches `main`. Do not edit or replace the acceptance contract `pytest/tests.py`. `a.py` is a workspace source-download utility, not part of the clearance application; leave it unchanged unless the team has a specific requirement for it.
+
+### Avinash — dashboard and manual UI guide
+
+**Paste/update and push today:**
+
+- `Project/dashboard/__init__.py`
+- `Project/dashboard/api_client.py`
+- `Project/dashboard/assessment_page.py`
+- `Project/dashboard/audit_trail.py`
+- `Project/dashboard/campaign_detail.py`
+- `Project/dashboard/clearance_chat.py`
+- `Project/dashboard/clearance_queue.py`
+- `Project/dashboard/decision_queue.py`
+- `Project/dashboard/home.py`
+- `Project/dashboard/queue_page.py`
+- `Project/dashboard/ui.py`
+- `Project/run_dashboard.py`
+- `Project/tests/test_clearance_chat_ui.py`
+- `Project/tests/test_dashboard_navigation.py`
+- `Project/tests/test_home_page.py`
+- `Project/docs/FRONTEND_MANUAL_TESTS.md`
+- `Project/.streamlit/config.toml` only if a dashboard configuration change is needed
+
+Check role-aware Home, sign-in, queue, campaign detail, clearance chat, decision queue, and audit navigation against the running API. Report the page and action for any failure.
+
+## Files the team must not copy or stage
+
+- `.env` files containing real credentials, passwords, or tokens
+- Generated model binaries, cleaned CSV outputs, quality reports, vector indexes, caches, `__pycache__`, and `.pyc` files
+- Temporary office lock files such as `~$Monday_SME_Baseline_Review.pptx`
+- `pytest/tests.py` acceptance tests: read and run them, but do not edit the contract
+- The Monday data-pipeline files listed above, unless fixing a real defect
+
+The reference brief `BreakCheck_AI.pdf`, existing handoff PDFs and review slides remain reference material; do not re-create them as code files.
+
+## Push and integration sequence for today
+
+1. Each owner works only in their assigned files and pushes their branch as soon as it is ready. Include a changed-file list and a one-line result/blocker.
+2. Rohan integrates one owner at a time in this order: **Karthiga → Raghu → Ronit → Rohan/API → Avinash/UI**. Resolve conflicts with the owner of the conflicting file.
+3. After integration, run the project acceptance and focused test suites, then start the API and dashboard for a short live smoke check. If something fails, report the exact failing test or UI step and the file owner; do not claim it passed.
+4. Before the day ends, Rohan confirms the intended commits are on remote `main`, and the team posts any remaining blocker with exact filenames.
+
+Run from the `Project` directory in PowerShell:
 
 ```powershell
 $env:BREAKCHECK_CHAT_OFFLINE = "1"
@@ -96,16 +188,4 @@ Remove-Item Env:BREAKCHECK_CHAT_OFFLINE
 exit $pytestExitCode
 ```
 
-Pass means exit code 0 and no failing tests. Also start the API and dashboard and run the live manual flow; the offline test suite does not replace the smoke test.
-
-## Thursday definition of done
-
-- Karthiga’s Monday data files remain in place, and her remaining model/training changes are pushed.
-- Rohan, Raghu, Ronit and Avinash have their own reviewed pushes on `main`.
-- The five cleaned datasets, three model metrics and 16-document knowledge index can be reproduced locally.
-- The service authenticates users and enforces role access; dashboard facts come through the service.
-- Chat answers are category-correct and sourced, and unsupported questions are refused.
-- Every spot is checked deterministically; assessments wait for a different Controller; all three decisions and audit records work.
-- The full suite passes and the end-to-end SME demo is complete by Thursday 4:00 PM IST.
-
-If an owner misses a checkpoint, they post the exact unpushed files and blocker. Reassign a file only after the owner and Rohan agree, so two people do not push competing edits to it.
+An exit code of `0` with no failing tests is a pass. The live check must also confirm API sign-in, a role-scoped queue request, opening a campaign detail, a grounded assistant answer, and the clearance decision flow.
